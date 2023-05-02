@@ -1,0 +1,68 @@
+name: Pipeline Testes Automatizados Cypress
+
+# executa o workflow toda vez que for realizado um push ou pull-request no repositório
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+  # permite também executar esse workflow manualmente na aba "Actions" do GitHub
+  workflow_dispatch:
+    # entrada de dados
+    inputs:
+      spec: 
+        description: Executar testes em modo headless por spec (suíte de testes) 
+        # executar por padrão todas as suítes de testes presentes na pasta "e2e" incluindo as subpastas
+        default: cypress/e2e/** 
+
+jobs:
+  # utilizado para garantir que os testes funcionais são executados com sucesso
+  testes-automatizados-e2e-cypress-chrome:
+    # agente de execução/runner do tipo máquina virtual bem enxuta, sem interface gráfica
+    runs-on: ubuntu-latest
+    
+    # template cypress com todas as dependências necessárias para executar os testes
+    container:
+      image: cypress/browsers:node18.12.0-chrome103-ff107
+      # usuário com perfil administrador
+      options: --user 1001
+      
+    steps:
+      - name: Passo 1 - Obter cópia do código-fonte do repositório
+        uses: actions/checkout@v3.3.0
+
+      - name: Passo 2 - Instalar dependências cypress, Executar testes em modo headless em um ambiente de produção e Gravar os resultados dos testes
+        uses: cypress-io/github-action@v5.0.8
+        with:
+          # instalar as dependências do projeto do arquivo "package.json"
+          install-command: yarn install
+          browser: chrome
+          # executar testes em modo headless
+          spec: ${{ github.event.inputs.spec }} # configurado em "on > workflow_dispatch > inputs > spec"
+
+        env:
+            # variável de ambiente padrão para autorização, identificado automaticamente por meio da conta do GitHub
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            # configurado manualmente no GitHub, na aba "Settings" (específica desse repositório) > "Secrets and variables" > "Actions"
+            CYPRESS_env_email: ${{ secrets.CYPRESS_env_email}}
+            CYPRESS_env_senha: ${{ secrets.CYPRESS_env_senha}}
+        
+      - name: Passo 3 - Armazenar os resultados dos testes em vídeos
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: cypress-videos-chrome
+          path: cypress/videos
+          # armazena por 30 dias
+          retention-days: 30
+
+      - name: Passo 4 - Armazenar os resultados dos testes que falharam em screenshots
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: cypress-screenshots-chrome
+          path: cypress/screenshots
+          # armazena por 30 dias
+          retention-days: 30
