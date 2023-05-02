@@ -1,0 +1,16 @@
+{
+  "name": "estudos-cypress",
+  "version": "1.0.0",
+  "description": "Projeto de Testes Automatizados desenvolvido para me aprofundar um pouco mais nos estudos sobre a ferramenta Cypress",
+  "main": "index.js",
+  "author": "Andressa Karla",
+  "license": "MIT",
+  "scripts": {
+    "test:qa": "yarn cypress run --spec cypress/e2e/seu-barriga-react/* --config baseUrl=https://barrigareact.wcaquino.me --env environment=qa --browser chrome",
+    "test:prod": "yarn cypress run --spec cypress/e2e/seu-barriga-react/* --config baseUrl=https://barrigareact.wcaquino.me --env environment=prod --browser chrome",
+    "test:trein:prod": "yarn cypress run --spec cypress/e2e/campo-treinamento-cypress/* --browser chrome"
+  },
+  "devDependencies": {
+    "cypress": "12.2.0"
+  }
+}
