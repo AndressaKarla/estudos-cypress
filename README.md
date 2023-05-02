@@ -2,7 +2,7 @@
 # :test_tube: Projeto de Testes Automatizados Web | Javascript | Cypress | GitHub Actions :test_tube:
 ---
 # :information_source: Introdução 
-Esse projeto é executado em um ambiente de produção no site ["Seu Barriga React"](https://barrigareact.wcaquino.me) e ["Campo de Treinamento (Cypress)"](https://wcaquino.me/cypress/componentes.html) desenvolvidos pelo [Francisco Wagner Costa Aquino](https://www.linkedin.com/in/francisco-wagner-costa-aquino-297ba6105/) com o objetivo de me aprofundar um pouco mais nos estudos sobre a ferramenta Cypress.
+Esse projeto é executado em um ambiente de produção nos sites ["Seu Barriga React"](https://barrigareact.wcaquino.me) e ["Campo de Treinamento (Cypress)"](https://wcaquino.me/cypress/componentes.html) desenvolvidos pelo [Francisco Wagner Costa Aquino](https://www.linkedin.com/in/francisco-wagner-costa-aquino-297ba6105/) com o objetivo de me aprofundar um pouco mais nos estudos sobre a ferramenta Cypress.
 
 ---
 ### Feito com ❤️ por Andressa Karla :wave: 
