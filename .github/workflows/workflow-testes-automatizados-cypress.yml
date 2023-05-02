@@ -46,8 +46,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             # configurado manualmente no GitHub, na aba "Settings" (específica desse repositório) > "Secrets and variables" > "Actions"
-            CYPRESS_env_email: ${{ secrets.CYPRESS_env_email }}
-            CYPRESS_env_senha: ${{ secrets.CYPRESS_env_senha }}
+            CYPRESS_usuario: ${{ secrets.CYPRESS_USUARIO }}
         
       - name: Passo 3 - Armazenar os resultados dos testes em vídeos
         uses: actions/upload-artifact@v3
