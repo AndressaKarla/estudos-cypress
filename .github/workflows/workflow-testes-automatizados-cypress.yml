@@ -31,8 +31,12 @@ jobs:
     steps:
       - name: Passo 1 - Obter cópia do código-fonte do repositório
         uses: actions/checkout@v3.3.0
-
-      - name: Passo 2 - Instalar dependências cypress, Executar testes em modo headless em um ambiente de produção e Gravar os resultados dos testes
+        
+      - name: Passo 2 - Redirecionar o conteúdo de "secrets.CYPRESS_ENV_USUARIO" para o arquivo "cypress.env.json"
+        run: |
+            echo '${{ secrets.CYPRESS_ENV_USUARIO }}' > cypress.env.json
+            
+      - name: Passo 3 - Instalar dependências cypress, Executar testes em modo headless em um ambiente de produção e Gravar os resultados dos testes
         uses: cypress-io/github-action@v5.0.8
         with:
           # instalar as dependências do projeto do arquivo "package.json"
@@ -45,10 +49,7 @@ jobs:
             # variável de ambiente padrão para autorização, identificado automaticamente por meio da conta do GitHub
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # configurado manualmente no GitHub, na aba "Settings" (específica desse repositório) > "Secrets and variables" > "Actions"
-            CYPRESS_usuario: ${{ secrets.CYPRESS_USUARIO }}
-        
-      - name: Passo 3 - Armazenar os resultados dos testes em vídeos
+      - name: Passo 4 - Armazenar os resultados dos testes em vídeos
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
@@ -57,7 +58,7 @@ jobs:
           # armazena por 30 dias
           retention-days: 30
 
-      - name: Passo 4 - Armazenar os resultados dos testes que falharam em screenshots
+      - name: Passo 5 - Armazenar os resultados dos testes que falharam em screenshots
         uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
