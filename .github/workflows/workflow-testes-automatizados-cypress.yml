@@ -18,7 +18,7 @@ on:
 
 jobs:
   # utilizado para garantir que os testes funcionais são executados com sucesso
-  testes-automatizados-e2e-cypress-chrome:
+  testes-automatizados-cypress-chrome:
     # agente de execução/runner do tipo máquina virtual bem enxuta, sem interface gráfica
     runs-on: ubuntu-latest
     
