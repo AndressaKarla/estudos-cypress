@@ -32,8 +32,8 @@ Cypress.Commands.add('login', () => {
 
     if (Cypress.env('environment') === 'qa') {
         Cypress.env('usuario', Cypress.env('env_usuario_qa'))
-    } 
-    
+    }
+
     else {
         Cypress.env('usuario', Cypress.env('env_usuario_prod'))
     }
@@ -53,6 +53,9 @@ Cypress.Commands.add('login', () => {
     cy.get('@botaoEntrar')
         .should('be.visible')
         .click()
+
+    cy.get(seletores.HOME.ICONE_CARTEIRA)
+        .should('be.visible')
 })
 
 Cypress.Commands.add('acessarMenuSair', () => {
@@ -67,7 +70,7 @@ Cypress.Commands.add('acessarMenuSair', () => {
 
     cy.get('@identificarMsg')
         .should('not.be.visible')
-    
+
     cy.get('@menuConfiguracoes')
         .should('be.visible')
         .click()

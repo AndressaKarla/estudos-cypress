@@ -19,8 +19,6 @@ describe('Login', () => {
         context("Quando eu informar os campos e eu clicar no botão Entrar", () => {
             beforeEach(() => {
                 cy.login()
-                cy.get(seletores.HOME.ICONE_CARTEIRA)
-                    .should('be.visible')
             })
 
             it("Então deve ser apresentada a mensagem Bem vindo", () => {
