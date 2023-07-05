@@ -11,7 +11,7 @@ import seletores from '../../support/campo-treinamento-cypress/seletores'
  */
 
 describe('Alert Simples', () => {
-    context("Dado que eu acesse o site Campo de Treinamento (Cypress)", () => {
+    context("Dado que eu esteja na página Home do site Campo de Treinamento (Cypress)", () => {
         beforeEach(() => {
             cy.visit(Cypress.env('baseUrl'))
         })
